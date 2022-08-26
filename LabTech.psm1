@@ -116,6 +116,7 @@ public static extern bool Wow64RevertWow64FsRedirection(ref IntPtr ptr);
     Add-Type $certCallback
 }
 [ServerCertificateValidationCallback]::Ignore()
+[System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 #Enable TLS, TLS1.1, TLS1.2, TLS1.3 in this session if they are available
 IF([Net.SecurityProtocolType]::Tls) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls}
 IF([Net.SecurityProtocolType]::Tls11) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls11}
